@@ -3,10 +3,12 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sandervanhooft/vaporize-spark-mollie.svg?style=flat-square)](https://packagist.org/packages/sandervanhooft/vaporize-spark-mollie)
 
 Running Spark for Mollie requires you to make a few modifications before it fully runs on Laravel Vapor.
-The default installation will break the profile photo upload (teams and users) and the invoice pdf download.
-This package takes care of that. It is recommended to use this package on a fresh installation of Spark for Mollie. 
+
+The default installation Spark will break the profile photo upload (teams and users) and the invoice pdf download.
+This package takes care of that. 
  
 ## Installation
+It is recommended to use this package on a fresh installation of Spark for Mollie.
 
 You can install the package via composer:
 
@@ -20,13 +22,18 @@ Next, install the required files with:
 php artisan vendor:publish --provider="SanderVanHooft\VaporizeSparkMollie\VaporizeSparkMollieServiceProvider" --force
 ```
 
-Finally, run the migrations. This adds the required field to the users and teams tables.
+Run the migrations. This adds the required field to the users and teams tables.
 
 ```bash
 php artisan migrate
 ```
 
-Optionally, use the published config file (`config/vaporize-spark-mollie.php`) to swap out the used classes with your own customized ones.
+### Important!
+Ensure you have wired up the Vapor NPM package as documented [here](https://docs.vapor.build/1.0/resources/storage.html#installing-the-vapor-npm-package).
+
+### Configuration (optional)
+You can use the published config file (`config/vaporize-spark-mollie.php`) to swap out the used classes with your own customized ones.
+
 This is what's in the config file:
 
 ```php
