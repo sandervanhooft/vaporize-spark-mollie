@@ -13,7 +13,7 @@ It is recommended to use this package on a fresh installation of Spark for Molli
 You can install the package via composer:
 
 ```bash
-composer require sandervanhooft/vaporize-spark-mollie
+composer require "sandervanhooft/vaporize-spark-mollie:^1.0"
 ```
 
 Next, install the required files with:
@@ -68,6 +68,8 @@ If you discover any security related issues, please email info@sandervanhooft.co
 
 - [Sander van Hooft](https://github.com/sandervanhooft)
 - [All Contributors](../../contributors)
+
+This package was inspired by [this thread on Laracasts.com](https://laracasts.com/discuss/channels/spark/spark-profile-photos-on-vapor), and [this great blog post](https://sandulat.com/validating-laravel-vapor-uploads/) by Sandulat.
 
 ## License
 
