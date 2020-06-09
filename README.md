@@ -1,66 +1,53 @@
-# :package_description
+# Run Spark for Mollie on Laravel Vapor
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/:package_name/run-tests?label=tests)](https://github.com/spatie/:package_name/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/sandervanhooft/vaporize-spark-mollie.svg?style=flat-square)](https://packagist.org/packages/sandervanhooft/vaporize-spark-mollie)
 
-**Note:** Replace ```:author_name``` ```:author_username``` ```:author_email``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can also run `configure-skeleton.sh` to do this automatically.
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-Learn how to create a package like this one, by watching our premium video course:
-
-[![Laravel Package training](https://spatie.be/github/package-training.jpg)](https://laravelpackage.training)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
+Running Spark for Mollie requires you to make a few modifications before it fully runs on Laravel Vapor.
+The default installation will break the profile photo upload (teams and users) and the invoice pdf download.
+This package takes care of that. It is recommended to use this package on a fresh installation of Spark for Mollie. 
+ 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require spatie/package-skeleton-laravel
+composer require sandervanhooft/vaporize-spark-mollie
 ```
 
-You can publish and run the migrations with:
+Next, install the required files with:
 
 ```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="SanderVanHooft\VaporizeSparkMollie\VaporizeSparkMollieServiceProvider" --force
+```
+
+Finally, run the migrations. This adds the required field to the users and teams tables.
+
+```bash
 php artisan migrate
 ```
 
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="config"
-```
-
-This is the contents of the published config file:
+Optionally, use the published config file (`config/vaporize-spark-mollie.php`) to swap out the used classes with your own customized ones.
+This is what's in the config file:
 
 ```php
 return [
+    /**
+     * These custom classes override the default Spark InvoiceController classes.
+     */
+    'user_invoice_controller' => UserInvoiceController::class,
+    'team_invoice_controller' => TeamInvoiceController::class,
+
+    /**
+     * These custom classes override the default Spark UpdateProfilePhoto and UpdateTeamPhoto interactions.
+     */
+    'user_update_photo_interaction' => UpdateProfilePhoto::class,
+    'team_update_photo_interaction' => UpdateTeamPhoto::class,
 ];
-```
-
-## Usage
-
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
-```
-
-## Testing
-
-``` bash
-composer test
 ```
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see the [releases](https://www.github.com/sandervanhooft/vaporize-spark-mollie/releases) for more information on what has changed recently.
 
 ## Contributing
 
@@ -68,11 +55,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+If you discover any security related issues, please email info@sandervanhooft.com instead of using the issue tracker.
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Sander van Hooft](https://github.com/sandervanhooft)
 - [All Contributors](../../contributors)
 
 ## License

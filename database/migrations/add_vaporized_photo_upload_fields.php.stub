@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddVaporizedPhotoUploadFields extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('photo_bucket')->nullable();
+            $table->string('photo_key')->nullable();
+            $table->string('photo_content_type')->nullable();
+        });
+
+        Schema::table('teams', function (Blueprint $table) {
+            $table->string('photo_bucket')->nullable();
+            $table->string('photo_key')->nullable();
+            $table->string('photo_content_type')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['photo_bucket', 'photo_key', 'photo_content_type']);
+        });
+
+        Schema::table('teams', function (Blueprint $table) {
+            $table->dropColumn(['photo_bucket', 'photo_key', 'photo_content_type']);
+        });
+    }
+}

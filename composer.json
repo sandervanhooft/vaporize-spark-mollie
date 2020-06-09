@@ -1,44 +1,46 @@
 {
-    "name": "spatie/:package_name",
-    "description": ":package_description",
+    "name": "sandervanhooft/vaporize-spark-mollie",
+    "description": "Run Spark for Mollie on Laravel Vapor",
     "keywords": [
-        "spatie",
-        ":package_name"
+        "sandervanhooft",
+        "vaporize-spark-mollie",
+        "spark",
+        "vapor",
+        "mollie"
     ],
-    "homepage": "https://github.com/spatie/:package_name",
+    "homepage": "https://github.com/sandervanhooft/vaporize-spark-mollie",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": "https://spatie.be",
+            "name": "Sander van Hooft",
+            "email": "info@sandervanhooft.com",
+            "homepage": "https://www.sandervanhooft.com",
             "role": "Developer"
         }
     ],
+    "repositories":[
+        {
+            "type": "vcs",
+            "url": "git@github.com:laravel/spark-aurelius-mollie.git"
+        }
+    ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.2",
+        "laravel/spark-aurelius-mollie": "^1.0",
+        "laravel/cashier-mollie": "^1.13",
+        "laravel/vapor-core": "^2.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "orchestra/testbench": "^5.0",
-        "phpunit/phpunit": "^9.0",
-        "psalm/plugin-laravel": "^1.2",
-        "vimeo/psalm": "^3.11"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "SanderVanHooft\\VaporizeSparkMollie\\": "src"
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
     },
     "config": {
@@ -47,11 +49,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
-            }
+                "SanderVanHooft\\VaporizeSparkMollie\\VaporizeSparkMollieServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
