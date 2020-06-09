@@ -71,7 +71,8 @@ class VaporizeSparkMollieServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function overrideInvoiceControllers() {
+    protected function overrideInvoiceControllers()
+    {
         $this->app->bind(
             \Laravel\Spark\Http\Controllers\Settings\Billing\InvoiceController::class,
             config('vaporize_spark_mollie.user_invoice_controller')

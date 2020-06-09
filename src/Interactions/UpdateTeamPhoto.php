@@ -45,12 +45,12 @@ class UpdateTeamPhoto extends Base
             'photo_url' => Storage::url($targetKey),
             'photo_bucket' => $data['bucket'],
             'photo_key' => $targetKey,
-            'photo_content_type' => $data['content_type']
+            'photo_content_type' => $data['content_type'],
         ])->save();
 
         event(new TeamPhotoUpdated($team, $data['bucket'], $targetKey, $data['content_type']));
 
-        try{
+        try {
             Storage::delete($oldPhotoKey);
         } catch (\Exception $e) {
             //

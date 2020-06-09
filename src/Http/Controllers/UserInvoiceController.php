@@ -31,7 +31,7 @@ class UserInvoiceController extends Base
             ->where('id', $id)->firstOrFail();
 
         /** @var \Illuminate\Http\Response $response */
-        $response =  $request->user()->downloadInvoice(
+        $response = $request->user()->downloadInvoice(
             $invoice->provider_id,
             ['id' => $invoice->id] + Spark::invoiceDataFor($request->user()),
             Invoice::DEFAULT_VIEW,

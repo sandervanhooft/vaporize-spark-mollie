@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace SanderVanHooft\VaporizeSparkMollie\Interactions;
 
-use SanderVanHooft\VaporizeSparkMollie\Events\ProfilePhotoUpdated;
-use SanderVanHooft\VaporizeSparkMollie\Rules\StorageFile as StorageFileRule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Spark\Interactions\Settings\Profile\UpdateProfilePhoto as Base;
+use SanderVanHooft\VaporizeSparkMollie\Events\ProfilePhotoUpdated;
+use SanderVanHooft\VaporizeSparkMollie\Rules\StorageFile as StorageFileRule;
 
 class UpdateProfilePhoto extends Base
 {
@@ -45,12 +45,12 @@ class UpdateProfilePhoto extends Base
             'photo_url' => Storage::url($targetKey),
             'photo_bucket' => $data['bucket'],
             'photo_key' => $targetKey,
-            'photo_content_type' => $data['content_type']
+            'photo_content_type' => $data['content_type'],
         ])->save();
 
         event(new ProfilePhotoUpdated($user, $data['bucket'], $targetKey, $data['content_type']));
 
-        try{
+        try {
             Storage::delete($oldPhotoKey);
         } catch (\Exception $e) {
             //

@@ -54,7 +54,7 @@ final class StorageFile implements Rule
             return false;
         }
 
-        if (!in_array(Storage::mimeType($value), $this->mimes)) {
+        if (! in_array(Storage::mimeType($value), $this->mimes)) {
             $this->message = 'Wrong file type.';
 
             return false;
